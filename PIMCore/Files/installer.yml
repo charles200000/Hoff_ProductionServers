@@ -3,7 +3,7 @@
 pimcore_install:
     parameters:
         database_credentials:
-            user:                 PIMadmin
+            user:                 pimcoreuser
             password:             toor
             dbname:               pimcoredb
             

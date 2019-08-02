@@ -19,4 +19,8 @@ sudo mysql -u root -p -e "EXIT;"
 sudo ufw allow mysql/tcp
 
 
-wget --output-document=50-server.cnf
+wget --output-document=50-server.cnf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/50-server.cnf?token=ABYSCGYSZG5R4GOVE5L47DC5JXY7Y
+sudo mv 50-server.cnf /etc/mysql/mariadb.conf.d/
+
+# add access to user on local network
+sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'pimcoreuser'@'192.168.0.%' IDENTIFIED BY 'toor' WITH GRANT OPTION;"
