@@ -83,3 +83,14 @@ sudo mv hoff_pimcore/ /var/www/
 
 cd ..
 rm -rf pimcore
+
+# configure php-fpm
+wget --output-document=www.conf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/www.conf?token=ABYSCGY3UEXX36FP4RXHTTC5JXT2K
+sudo mv www.conf /etc/php/7.2/fpm/pool.d/
+
+#configure nginx
+wget --output-document=HoffPIM 
+
+
+
+sudo systemctl restart nginx.service
