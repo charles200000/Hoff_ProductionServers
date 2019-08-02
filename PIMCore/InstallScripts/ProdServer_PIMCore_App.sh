@@ -95,8 +95,10 @@ sudo mv HoffPIM /etc/nginx/sites-available/
 sudo systemctl restart nginx.service
 
 #Config PIMCore
-
 sudo apt-get install mariadb-client
 
+wget --output-document=installer.yml https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/installer.yml?token=ABYSCG2TJ3FSHPY4VUUGSTK5JXWZA
+sudo mv installer.yml /var/www/hoff_pimcore/app/config/
 
-sudo ./var/www/hoff_pimcore/vendor/bin/pimcore-install
+cd /var/www/hoff_pimcore/
+sudo ./vendor/bin/pimcore-install --admin-username PIMadmin --admin-password toor

@@ -17,3 +17,6 @@ sudo mysql -u root -p -e "EXIT;"
 
 # open ports
 sudo ufw allow mysql/tcp
+
+
+wget --output-document=50-server.cnf
