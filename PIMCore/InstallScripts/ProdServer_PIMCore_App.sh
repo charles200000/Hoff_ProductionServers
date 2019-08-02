@@ -66,3 +66,20 @@ sudo apt-get install libimage-exiftool-perl webp facedetect html2text
 sudo apt-get install locales-all
 
 ### Start config setup
+
+# php setup
+# !!!!!! TOKEN MAY CHANGE !!
+wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCGYB3ZE2DSRDY6E444S5JXJJ4
+sudo mv php.ini /etc/php/7.2/fpm/
+
+sudo systemctl restart nginx.service
+
+# Install PIMCore
+mkdir pimcore
+cd pimcore
+COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/skeleton HoffPIM
+#install pimcore
+sudo mv hoff_pimcore/ /var/www/
+
+cd ..
+rm -rf pimcore
