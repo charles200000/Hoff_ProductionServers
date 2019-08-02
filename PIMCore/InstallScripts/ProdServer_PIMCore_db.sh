@@ -13,3 +13,7 @@ sudo mysql -u root -p -e "CREATE USER 'pimcoreuser'@'localhost' IDENTIFIED BY 't
 sudo mysql -u root -p -e "GRANT ALL ON pimcoredb.* TO 'pimcoreuser'@'localhost' IDENTIFIED BY 'user_password_here' WITH GRANT OPTION;"
 sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
 sudo mysql -u root -p -e "EXIT;"
+
+
+# open ports
+sudo ufw allow mysql/tcp

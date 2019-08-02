@@ -89,8 +89,14 @@ wget --output-document=www.conf https://raw.githubusercontent.com/charles200000/
 sudo mv www.conf /etc/php/7.2/fpm/pool.d/
 
 #configure nginx
-wget --output-document=HoffPIM 
-
-
+wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCGZ6PNYY5NS5IBCBMYC5JXUY4
+sudo mv HoffPIM /etc/nginx/sites-available/
 
 sudo systemctl restart nginx.service
+
+#Config PIMCore
+
+sudo apt-get install mariadb-client
+
+
+sudo ./var/www/hoff_pimcore/vendor/bin/pimcore-install
