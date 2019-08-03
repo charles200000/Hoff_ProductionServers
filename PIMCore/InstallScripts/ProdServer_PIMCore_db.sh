@@ -20,7 +20,7 @@ sudo mysql -u root -p -e "set global innodb_large_prefix =on;"
 sudo ufw allow mysql/tcp
 
 
-wget --output-document=50-server.cnf 
+wget --output-document=50-server.cnf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/50-server.cnf?token=ABYSCG5SCIBIRDXURMSNOTS5J2ODW
 sudo mv 50-server.cnf /etc/mysql/mariadb.conf.d/
 
 # add access to user on local network
