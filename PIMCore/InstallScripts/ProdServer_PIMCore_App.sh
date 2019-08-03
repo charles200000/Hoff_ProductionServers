@@ -44,7 +44,7 @@ sudo apt-get install -y libreoffice libreoffice-script-provider-python libreoffi
 # Install wkhtmltopdf
 wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
 sudo dpkg -i wkhtmltox*
-sudo apt-get install -f
+sudo apt-get install -y -f
 sudo dpkg -i wkhtmltox*
 rm wkhtmltox*
 
@@ -70,11 +70,11 @@ sudo chmod 0755 /usr/local/bin/cjpeg
 
 # Other tools
 #TODO : add dependencies for this line
-sudo apt-get install libimage-exiftool-perl webp facedetect html2text
-sudo apt-get install -f
+sudo apt-get install -y libimage-exiftool-perl webp facedetect html2text
+sudo apt-get install -y -f
 
 # get all locals
-sudo apt-get install locales-all
+sudo apt-get install -y locales-all
 
 echo "##############################################################################################################"
 echo "##############################################################################################################"
@@ -88,14 +88,14 @@ echo "##########################################################################
 ####################################################################################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
-#wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCGZNNUWO62POAUC6Y5S5J2OJG
-#sudo mv php.ini /etc/php/7.2/fpm/
+#wget --output-document=php.ini 
 sudo mv ../Files/php.ini /etc/php/7.2/fpm/
+echo "Moved php.ini config OK"
 
 # configure php-fpm
-#wget --output-document=www.conf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/www.conf?token=ABYSCGY3UEXX36FP4RXHTTC5JXT2K
-#sudo mv www.conf /etc/php/7.2/fpm/pool.d/
+#wget --output-document=www.conf 
 sudo mv ../Files/www.conf /etc/php/7.2/fpm/pool.d/
+echo "Moved www.conf OK"
 
 sudo service php7.2-fpm restart
 
@@ -110,18 +110,21 @@ cd ..
 rm -rf pimcore
 
 # configure nginx
-#wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCG7TSAR4R25T7LVTWF25J2OLY
+#wget --output-document=HoffPIM
 sudo mv ../Files/HoffPIM /etc/nginx/sites-available/
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/HoffPIM /etc/nginx/sites-enabled/
+echo "Moved nginx config OK"
 
 sudo systemctl restart nginx.service
 
 # Config PIMCore
-sudo apt-get install mariadb-client
+sudo apt-get install -y mariadb-client
 
-#wget --output-document=installer.yml https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/installer.yml?token=ABYSCG7UKQYBJ7I3UIUF4ES5J32DS
+#wget --output-document=installer.yml
 sudo mv ../Files/installer.yml /var/www/hoff_pimcore/app/config/
+echo "Moved installer config OK"
+
 
 
 # start installer : you need to say yes
@@ -138,7 +141,7 @@ sudo rm -rf /var/www/html/
 # Add https 
 sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get install certbot python-certbot-nginx
+sudo apt-get install -y certbot python-certbot-nginx
 
 echo "configuration done !"
 
