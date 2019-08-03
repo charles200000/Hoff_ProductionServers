@@ -1,5 +1,8 @@
-# need to configure : Password for user pimcoreuser + local network acess
+#!/bin/bash
 
+echo "let's get started"
+
+# need to configure : Password for user pimcoreuser + local network acess
 #base stuff
 sudo apt-get update
 sudo apt-get upgrade
