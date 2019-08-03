@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "let's get started"
 
 sudo apt-get update
