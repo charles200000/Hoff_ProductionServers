@@ -1,7 +1,8 @@
 #!/bin/bash
 
-echo "let's get started"
+echo "Installing PIMCore on the application server"
 
+echo "Default start : "
 sudo apt-get update
 sudo apt-get upgrade
 
@@ -13,10 +14,13 @@ sudo add-apt-repository ppa:ondrej/php
 
 
 # first php dependencies
-sudo apt-get install php7.2-fpm php7.2-cgi php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-opcache php7.2-curl
+sudo apt-get install -y php7.2-fpm php7.2-cgi php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-opcache php7.2-curl
 
 # install small dependencies
-sudo apt-get install php-imagick graphviz
+sudo apt-get install -y php-imagick graphviz
+
+
+echo "All dependencies updated"
 
 
 ##
@@ -32,10 +36,10 @@ sudo mv composer.phar /usr/local/bin/composer
 
 
 #install FFMPEG
-sudo apt-get install ffmpeg
+sudo apt-get install -y ffmpeg
 
 # Install LibreOffcie, pdftotext...
-sudo apt-get install libreoffice libreoffice-script-provider-python libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 ghostscript
+sudo apt-get install -y libreoffice libreoffice-script-provider-python libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 ghostscript
 
 # Install wkhtmltopdf
 wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
@@ -72,17 +76,26 @@ sudo apt-get install -f
 # get all locals
 sudo apt-get install locales-all
 
+echo "##############################################################################################################"
+echo "##############################################################################################################"
+echo "All tools are installed now let's configure"
+echo "##############################################################################################################"
+echo "##############################################################################################################"
+
+
 ####################################################################################################################################
 ### Start config setup
 ####################################################################################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
-wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCGZNNUWO62POAUC6Y5S5J2OJG
-sudo mv php.ini /etc/php/7.2/fpm/
+#wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCGZNNUWO62POAUC6Y5S5J2OJG
+#sudo mv php.ini /etc/php/7.2/fpm/
+sudo mv ../Files/php.ini /etc/php/7.2/fpm/
 
 # configure php-fpm
-wget --output-document=www.conf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/www.conf?token=ABYSCGY3UEXX36FP4RXHTTC5JXT2K
-sudo mv www.conf /etc/php/7.2/fpm/pool.d/
+#wget --output-document=www.conf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/www.conf?token=ABYSCGY3UEXX36FP4RXHTTC5JXT2K
+#sudo mv www.conf /etc/php/7.2/fpm/pool.d/
+sudo mv ../Files/www.conf /etc/php/7.2/fpm/pool.d/
 
 sudo service php7.2-fpm restart
 
@@ -97,8 +110,8 @@ cd ..
 rm -rf pimcore
 
 # configure nginx
-wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCG7TSAR4R25T7LVTWF25J2OLY
-sudo mv HoffPIM /etc/nginx/sites-available/
+#wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCG7TSAR4R25T7LVTWF25J2OLY
+sudo mv ../Files/HoffPIM /etc/nginx/sites-available/
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/HoffPIM /etc/nginx/sites-enabled/
 
@@ -107,13 +120,13 @@ sudo systemctl restart nginx.service
 # Config PIMCore
 sudo apt-get install mariadb-client
 
-wget --output-document=installer.yml https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/installer.yml?token=ABYSCG4FOM6MAJUXS4GVJIS5JXZ2O
-sudo mv installer.yml /var/www/hoff_pimcore/app/config/
+#wget --output-document=installer.yml https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/installer.yml?token=ABYSCG7UKQYBJ7I3UIUF4ES5J32DS
+sudo mv ../Files/installer.yml /var/www/hoff_pimcore/app/config/
 
 
 # start installer : you need to say yes
 cd /var/www/hoff_pimcore/
-sudo ./vendor/bin/pimcore-install --admin-username PIMadmin --admin-password toor
+sudo ./vendor/bin/pimcore-install #--admin-username PIMadmin --admin-password toor
 sudo chown -R www-data:www-data app/config bin composer.json pimcore var web/pimcore web/var
 sudo chmod ug+x bin/*
 cd
@@ -126,7 +139,18 @@ sudo rm -rf /var/www/html/
 sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get install certbot python-certbot-nginx
-sudo certbot renew --dry-run
+
+echo "configuration done !"
+
+echo "please configure the cron job :"
+echo "crontab -e"
+echo "*/5 * * * * /var/www/hoff_pimcore/bin/console maintenance"
+
+echo "##############################################################################################################"
+echo "##############################################################################################################"
+
+echo "please reboot !"
+
 
 # add maintenance job
 # crontab -e
