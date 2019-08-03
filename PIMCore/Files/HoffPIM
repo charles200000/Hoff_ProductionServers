@@ -4,7 +4,7 @@ upstream php-pimcore5 {
 
 server {
     listen 80;
-    server_name HoffPIM;
+    server_name pim.hoff.fr;
     root /var/www/hoff_pimcore/web;
     index index.php;
 
@@ -107,6 +107,7 @@ server {
         # see: http://trac.nginx.org/nginx/ticket/321
         set $path_info $fastcgi_path_info;
         fastcgi_param PATH_INFO $path_info;
+        include snippets/fastcgi-php.conf;
 
         # Activate these, if using Symlinks and opcache
         # fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;

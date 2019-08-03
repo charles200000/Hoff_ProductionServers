@@ -70,7 +70,7 @@ sudo apt-get install locales-all
 ####################################################################################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
-wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCGYB3ZE2DSRDY6E444S5JXJJ4
+wget --output-document=php.ini 
 sudo mv php.ini /etc/php/7.2/fpm/
 
 sudo service php7.2-fpm restart
