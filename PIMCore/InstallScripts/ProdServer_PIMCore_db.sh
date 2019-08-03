@@ -1,11 +1,12 @@
+# need to configure : Password for user pimcoreuser + local network acess
+
 #base stuff
 sudo apt-get update
 sudo apt-get upgrade
 sudo reboot
 
 #Install Mariadb
-sudo apt-get install mariadb-server
-
+sudo apt-get install mariadb-server 
 
 sudo mysql -u root -p
 sudo mysql -u root -p -e "CREATE DATABASE pimcoredb charset=utf8mb4;"
