@@ -41,6 +41,7 @@ sudo apt-get install libreoffice libreoffice-script-provider-python libreoffice-
 wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
 sudo dpkg -i wkhtmltox*
 sudo apt-get install -f
+sudo dpkg -i wkhtmltox*
 rm wkhtmltox*
 
 
@@ -66,6 +67,7 @@ sudo chmod 0755 /usr/local/bin/cjpeg
 # Other tools
 #TODO : add dependencies for this line
 sudo apt-get install libimage-exiftool-perl webp facedetect html2text
+sudo apt-get install -f
 
 # get all locals
 sudo apt-get install locales-all
@@ -88,13 +90,13 @@ sudo service php7.2-fpm restart
 mkdir pimcore
 cd pimcore
 COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/skeleton hoff_pimcore
-#install pimcore
+# install pimcore
 sudo mv hoff_pimcore/ /var/www/
 
 cd ..
 rm -rf pimcore
 
-#configure nginx
+# configure nginx
 wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCG7TSAR4R25T7LVTWF25J2OLY
 sudo mv HoffPIM /etc/nginx/sites-available/
 sudo rm /etc/nginx/sites-enabled/default
@@ -102,14 +104,14 @@ sudo ln -s /etc/nginx/sites-available/HoffPIM /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx.service
 
-#Config PIMCore
+# Config PIMCore
 sudo apt-get install mariadb-client
 
 wget --output-document=installer.yml https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/installer.yml?token=ABYSCG4FOM6MAJUXS4GVJIS5JXZ2O
 sudo mv installer.yml /var/www/hoff_pimcore/app/config/
 
 
-#start installer : you need to say yes
+# start installer : you need to say yes
 cd /var/www/hoff_pimcore/
 sudo ./vendor/bin/pimcore-install --admin-username PIMadmin --admin-password toor
 sudo chown -R www-data:www-data app/config bin composer.json pimcore var web/pimcore web/var

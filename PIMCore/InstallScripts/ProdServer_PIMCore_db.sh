@@ -3,7 +3,7 @@
 echo "let's get started"
 
 # need to configure : Password for user pimcoreuser + local network acess
-#base stuff
+# base stuff
 sudo apt-get update
 sudo apt-get upgrade
 

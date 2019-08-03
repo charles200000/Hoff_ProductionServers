@@ -6,8 +6,5 @@ pimcore_install:
             user:                 pimcoreuser
             password:             toor
             dbname:               pimcoredb
-            
-            # env variables can be directly read with the %env() syntax
-            # see https://symfony.com/blog/new-in-symfony-3-2-runtime-environment-variables
-            host:                 192.168.0.50
+            host:                 192.168.0.15
             port:                 3306
