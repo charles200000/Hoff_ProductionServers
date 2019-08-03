@@ -65,19 +65,20 @@ sudo apt-get install libimage-exiftool-perl webp facedetect html2text
 # get all locals
 sudo apt-get install locales-all
 
+####################################################################################################################################
 ### Start config setup
-
+####################################################################################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
 wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCGYB3ZE2DSRDY6E444S5JXJJ4
 sudo mv php.ini /etc/php/7.2/fpm/
 
-sudo systemctl restart nginx.service
+sudo service php7.2-fpm restart
 
 # Install PIMCore
 mkdir pimcore
 cd pimcore
-COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/skeleton HoffPIM
+COMPOSER_MEMORY_LIMIT=-1 composer create-project pimcore/skeleton hoff_pimcore
 #install pimcore
 sudo mv hoff_pimcore/ /var/www/
 
@@ -91,14 +92,21 @@ sudo mv www.conf /etc/php/7.2/fpm/pool.d/
 #configure nginx
 wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCGZ6PNYY5NS5IBCBMYC5JXUY4
 sudo mv HoffPIM /etc/nginx/sites-available/
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/HoffPIM /etc/nginx/sites-enabled/
 
 sudo systemctl restart nginx.service
 
 #Config PIMCore
 sudo apt-get install mariadb-client
 
-wget --output-document=installer.yml https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/installer.yml?token=ABYSCG2TJ3FSHPY4VUUGSTK5JXWZA
+wget --output-document=installer.yml https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/installer.yml?token=ABYSCG4FOM6MAJUXS4GVJIS5JXZ2O
 sudo mv installer.yml /var/www/hoff_pimcore/app/config/
 
+
+#start installer : you need to say yes
 cd /var/www/hoff_pimcore/
 sudo ./vendor/bin/pimcore-install --admin-username PIMadmin --admin-password toor
+
+
+sudo reboot
