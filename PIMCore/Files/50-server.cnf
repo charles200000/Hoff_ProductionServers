@@ -10,7 +10,9 @@
 
 # this is only for the mysqld standalone daemon
 [mysqld]
-
+innodb_file_format = Barracuda
+innodb_large_prefix = 1
+innodb_file_per_table = 1
 #
 # * Basic Settings
 #

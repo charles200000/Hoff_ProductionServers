@@ -9,7 +9,7 @@ sudo add-apt-repository ppa:ondrej/php
 
 
 # first php dependencies
-sudo apt-get install php7.2-fpm php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-opcache php7.2-curl
+sudo apt-get install php7.2-fpm php7.2-cgi php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-opcache php7.2-curl
 
 # install small dependencies
 sudo apt-get install php-imagick graphviz
@@ -60,6 +60,7 @@ sudo wget https://github.com/imagemin/mozjpeg-bin/raw/master/vendor/linux/cjpeg 
 sudo chmod 0755 /usr/local/bin/cjpeg
 
 # Other tools
+#TODO : add dependencies for this line
 sudo apt-get install libimage-exiftool-perl webp facedetect html2text
 
 # get all locals
@@ -70,8 +71,12 @@ sudo apt-get install locales-all
 ####################################################################################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
-wget --output-document=php.ini 
+wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCG6YK5SEB7QNHSPMV3K5J2FHI
 sudo mv php.ini /etc/php/7.2/fpm/
+
+# configure php-fpm
+wget --output-document=www.conf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/www.conf?token=ABYSCGY3UEXX36FP4RXHTTC5JXT2K
+sudo mv www.conf /etc/php/7.2/fpm/pool.d/
 
 sudo service php7.2-fpm restart
 
@@ -85,12 +90,8 @@ sudo mv hoff_pimcore/ /var/www/
 cd ..
 rm -rf pimcore
 
-# configure php-fpm
-wget --output-document=www.conf https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/www.conf?token=ABYSCGY3UEXX36FP4RXHTTC5JXT2K
-sudo mv www.conf /etc/php/7.2/fpm/pool.d/
-
 #configure nginx
-wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCGZ6PNYY5NS5IBCBMYC5JXUY4
+wget --output-document=HoffPIM 
 sudo mv HoffPIM /etc/nginx/sites-available/
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/HoffPIM /etc/nginx/sites-enabled/
@@ -107,6 +108,22 @@ sudo mv installer.yml /var/www/hoff_pimcore/app/config/
 #start installer : you need to say yes
 cd /var/www/hoff_pimcore/
 sudo ./vendor/bin/pimcore-install --admin-username PIMadmin --admin-password toor
+sudo chown -R www-data:www-data app/config bin composer.json pimcore var web/pimcore web/var
+sudo chmod ug+x bin/*
+cd
 
+#delete default config
+sudo rm /etc/nginx/sites-available/default
+sudo rm -rf /var/www/html/
 
-sudo reboot
+# Add https 
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get install certbot python-certbot-nginx
+sudo certbot renew --dry-run
+
+# add maintenance job
+# crontab -e
+# */5 * * * * /var/www/hoff_pimcore/bin/console maintenance
+
+# reboot all
