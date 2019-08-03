@@ -1,3 +1,1 @@
-Hoff_ProductionServers
-
-Setup scripts and files
+Please see the documentation for the installation !!!
