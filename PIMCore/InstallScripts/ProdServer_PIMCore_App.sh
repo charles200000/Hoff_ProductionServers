@@ -71,7 +71,7 @@ sudo apt-get install locales-all
 ####################################################################################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
-wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCG6YK5SEB7QNHSPMV3K5J2FHI
+wget --output-document=php.ini https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/php.ini?token=ABYSCGZNNUWO62POAUC6Y5S5J2OJG
 sudo mv php.ini /etc/php/7.2/fpm/
 
 # configure php-fpm
@@ -91,7 +91,7 @@ cd ..
 rm -rf pimcore
 
 #configure nginx
-wget --output-document=HoffPIM 
+wget --output-document=HoffPIM https://raw.githubusercontent.com/charles200000/Hoff_ProductionServers/master/PIMCore/Files/HoffPIM?token=ABYSCG7TSAR4R25T7LVTWF25J2OLY
 sudo mv HoffPIM /etc/nginx/sites-available/
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/HoffPIM /etc/nginx/sites-enabled/
