@@ -20,7 +20,7 @@ sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
 echo "database setup ok"
 
 #wget --output-document=50-server.cnf
-sudo mv ../Files/50-server.cnf /etc/mysql/mariadb.conf.d/
+sudo mv ./Files/50-server.cnf /etc/mysql/mariadb.conf.d/
 echo "moved mariadb config OK"
 
 # open ports

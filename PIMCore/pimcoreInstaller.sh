@@ -14,7 +14,8 @@ if [ $choice -eq 1 ]
 then
     echo "##########################################################################"
     echo "Please edit the installer.yml file to set the right databse ip !!!"
-    read -p "Press enter if it's already done !"
+    echo "press  [ENTER]  to continue when it is done !"
+    read continue
     sed -i "s/^            password:.*/            password:             $pimcoredbPass/" ./Files/installer.yml
     echo "Config file updated with the correct password !"
     sudo sh ./InstallScripts/ProdServer_PIMCore_App.sh
