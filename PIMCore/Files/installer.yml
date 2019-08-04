@@ -4,7 +4,7 @@ pimcore_install:
     parameters:
         database_credentials:
             user:                 pimcoreuser
-            password:             toor
+            password:             
             dbname:               pimcoredb
-            host:                 192.168.0.15
+            host:                 
             port:                 3306
