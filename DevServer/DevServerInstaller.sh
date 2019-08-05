@@ -60,3 +60,5 @@ cd Hoff_IT_Docs
 sudo docker-compose up
 sudo docker-compose up -d
 cd ..
+
+echo "Please see the doc to activate https"
