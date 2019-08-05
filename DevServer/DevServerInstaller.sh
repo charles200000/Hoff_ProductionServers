@@ -45,3 +45,18 @@ echo "##########################################################################
 echo "                                                          let's configure all services"
 echo "###########################################################################################################################################"
 
+sudo rm /etc/nginx/sites-enabled/default
+
+sudo mv ./Files/devServer /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/devServer /etc/nginx/sites-enabled/
+
+sudo service nginx restart
+
+cd Gitlab
+sudo docker-compose up -d
+cd ..
+
+cd Hoff_IT_Docs
+sudo docker-compose up
+sudo docker-compose up -d
+cd ..

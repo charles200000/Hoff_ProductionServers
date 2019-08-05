@@ -1,5 +1,9 @@
 upstream gitlab {
-    server 127.0.0.1:8080;
+    server 127.0.0.1:443;
+}
+
+upstream gitlab_ssl {
+    server 127.0.0.1:666;
 }
 
 upstream docs {
