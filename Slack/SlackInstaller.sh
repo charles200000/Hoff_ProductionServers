@@ -13,13 +13,10 @@ echo "Done with linux update !"
 
 sudo apt install -y postgresql postgresql-contrib
 
-sudo --login --user postgres
 # in the postgresql user
-psql -c 'CREATE DATABASE mattermost;'
-psql -c "CREATE USER mmuser WITH PASSWORD '$dbPassword';"
-psql -c 'GRANT ALL PRIVILEGES ON DATABASE mattermost to mmuser;'
-exit
-# leaving postgresql user
+sudo -u postgres psql -c 'CREATE DATABASE mattermost;'
+sudo -u postgres psql -c "CREATE USER mmuser WITH PASSWORD '$dbPassword';"
+sudo -u postgres psql -c 'GRANT ALL PRIVILEGES ON DATABASE mattermost to mmuser;'
 
 # move postgresql config file
 sudo mv ./Files/pg_hba.conf /etc/postgresql/10/main/
