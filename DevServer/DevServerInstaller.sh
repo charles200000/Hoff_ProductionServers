@@ -12,6 +12,8 @@ sudo apt-get install -y \
     gnupg2 \
     software-properties-common
 
+sudo apt-get install -y nginx
+
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 

@@ -1,0 +1,29 @@
+upstream gitlab {
+    server 127.0.0.1:8080;
+}
+
+upstream docs {
+    server 127.0.0.1:3000;
+}
+
+server {
+    listen    80;
+    server_name    www.gitlab.hoff.fr gitlab.hoff.com;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://gitlab;
+    }
+}
+
+server {
+    listen 80;
+
+    server_name www.docs.hoff.fr docs.hoff.fr;
+
+     location / {
+        include proxy_params;
+        proxy_pass http://docs;
+    }
+
+}
