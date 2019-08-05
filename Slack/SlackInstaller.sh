@@ -46,8 +46,10 @@ sudo chown -R mattermost:mattermost /opt/mattermost
 sudo chmod -R g+w /opt/mattermost
 
 # setup the config file :
-sed -i 's/^        "DataSource":.*/        "DataSource": "postgres://mmuser:$dbPassword@localhost:5432/mattermost?sslmode=disable&connect_timeout=10",/' ./Files/config.json
+sed -i "s/TO_BE_REPLACE_BY_SCRIPT/$dbPassword/" ./Files/config.json
 sudo mv ./Files/config.json /opt/mattermost/config/
+
+#sed -i "s/^        \"DataSource\":.*/        \"DataSource\": \"postgres://mmuser:$dbPassword@localhost:5432/mattermost?sslmode=disable&connect_timeout=10\",/" ./Files/config.json
 
 echo "configuring the system service"
 sudo mv ./Files/mattermost.service /lib/systemd/system/

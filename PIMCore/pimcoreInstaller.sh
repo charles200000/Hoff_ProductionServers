@@ -16,7 +16,7 @@ then
     echo "Please edit the installer.yml file to set the right databse ip !!!"
     echo "press  [ENTER]  to continue when it is done !"
     read continue
-    sed -i "s/^            password:.*/            password:             $pimcoredbPass/" ./Files/installer.yml
+    sed -i "s/TO_BE_REPLACE_BY_SCRIPT/$pimcoredbPass/" ./Files/installer.yml
     echo "Config file updated with the correct password !"
     sudo sh ./InstallScripts/ProdServer_PIMCore_App.sh
 fi
