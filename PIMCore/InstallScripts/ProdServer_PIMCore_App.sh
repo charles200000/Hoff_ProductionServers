@@ -89,12 +89,12 @@ echo "##########################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
 #wget --output-document=php.ini 
-sudo mv ../Files/php.ini /etc/php/7.2/fpm/
+sudo mv ./Files/php.ini /etc/php/7.2/fpm/
 echo "Moved php.ini config OK"
 
 # configure php-fpm
 #wget --output-document=www.conf 
-sudo mv ../Files/www.conf /etc/php/7.2/fpm/pool.d/
+sudo mv ./Files/www.conf /etc/php/7.2/fpm/pool.d/
 echo "Moved www.conf OK"
 
 sudo service php7.2-fpm restart
@@ -111,7 +111,7 @@ rm -rf pimcore
 
 # configure nginx
 #wget --output-document=HoffPIM
-sudo mv ../Files/HoffPIM /etc/nginx/sites-available/
+sudo mv ./Files/HoffPIM /etc/nginx/sites-available/
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/HoffPIM /etc/nginx/sites-enabled/
 echo "Moved nginx config OK"
@@ -122,7 +122,7 @@ sudo systemctl restart nginx.service
 sudo apt-get install -y mariadb-client
 
 #wget --output-document=installer.yml
-sudo mv ../Files/installer.yml /var/www/hoff_pimcore/app/config/
+sudo mv ./Files/installer.yml /var/www/hoff_pimcore/app/config/
 echo "Moved installer config OK"
 
 
