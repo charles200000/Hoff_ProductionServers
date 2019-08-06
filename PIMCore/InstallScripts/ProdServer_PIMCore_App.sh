@@ -10,11 +10,12 @@ sudo apt-get install -y nginx
 sudo systemctl enable nginx.service
 
 sudo apt-get install -y software-properties-common
-sudo add-apt-repository ppa:ondrej/php
+sudo apt install -y ca-certificates apt-transport-https gnupg2 gnupg1 curl libcurl4
 
+echo "base packages installed"
 
 # first php dependencies
-sudo apt-get install -y php7.2-fpm php7.2-cgi php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-opcache php7.2-curl
+sudo apt-get install -y php7.3-fpm php7.3-cgi php7.3-common php7.3-mbstring php7.3-xmlrpc php7.3-soap php7.3-gd php7.3-xml php7.3-intl php7.3-mysql php7.3-cli php7.3-zip php7.3-opcache php7.3-curl
 
 # install small dependencies
 sudo apt-get install -y php-imagick graphviz
@@ -42,7 +43,7 @@ sudo apt-get install -y ffmpeg
 sudo apt-get install -y libreoffice libreoffice-script-provider-python libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 ghostscript
 
 # Install wkhtmltopdf
-wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb
 sudo dpkg -i wkhtmltox*
 sudo apt-get install -y -f
 sudo dpkg -i wkhtmltox*
@@ -89,15 +90,15 @@ echo "##########################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
 #wget --output-document=php.ini 
-sudo mv ./Files/php.ini /etc/php/7.2/fpm/
+sudo mv ./Files/php.ini /etc/php/7.3/fpm/
 echo "Moved php.ini config OK"
 
 # configure php-fpm
 #wget --output-document=www.conf 
-sudo mv ./Files/www.conf /etc/php/7.2/fpm/pool.d/
+sudo mv ./Files/www.conf /etc/php/7.3/fpm/pool.d/
 echo "Moved www.conf OK"
 
-sudo service php7.2-fpm restart
+sudo service php7.3-fpm restart
 
 # Install PIMCore
 mkdir pimcore
@@ -130,7 +131,7 @@ echo "Moved installer config OK"
 # start installer : you need to say yes
 cd /var/www/hoff_pimcore/
 sudo ./vendor/bin/pimcore-install #--admin-username PIMadmin --admin-password toor
-sudo chown -R www-data:www-data app/config bin composer.json pimcore var web/pimcore web/var
+sudo chown -R www-data:www-data app/config bin composer.json web/var
 sudo chmod ug+x bin/*
 cd
 

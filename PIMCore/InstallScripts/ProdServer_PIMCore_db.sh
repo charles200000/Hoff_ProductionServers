@@ -23,7 +23,11 @@ sudo mv ./Files/50-server.cnf /etc/mysql/mariadb.conf.d/
 echo "moved mariadb config OK"
 
 # open ports
+sudo apt-get install ufw
 sudo ufw allow mysql/tcp
+sudo ufw allow ssh
+echo "Do you want to enable ufw with ssh and mysql configure ?"
+sudo ufw enable
 
 # add access to user on local network
 sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'pimcoreuser'@'192.168.0.%' IDENTIFIED BY '$1' WITH GRANT OPTION;"
