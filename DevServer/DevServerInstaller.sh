@@ -57,7 +57,6 @@ sudo docker-compose up -d
 cd ..
 
 cd Docs
-sudo docker-compose up
 sudo docker-compose up -d
 cd ..
 
