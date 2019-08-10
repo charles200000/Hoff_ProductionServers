@@ -2,17 +2,13 @@ upstream gitlab {
     server 127.0.0.1:443;
 }
 
-upstream gitlab_ssl {
-    server 127.0.0.1:666;
-}
-
 upstream docs {
     server 127.0.0.1:3000;
 }
 
 server {
     listen    80;
-    server_name    www.gitlab.hoff.fr gitlab.hoff.com;
+    server_name    www.git.hoff.fr git.hoff.com;
 
     location / {
         include proxy_params;

@@ -4,7 +4,7 @@ upstream php-pimcore5 {
 
 server {
     listen 80;
-    server_name pim.hoff.fr;
+    server_name pim.hoff.fr www.pim.hoff.fr;
     root /var/www/hoff_pimcore/web;
     index index.php;
 

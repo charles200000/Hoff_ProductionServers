@@ -131,7 +131,7 @@ echo "Moved installer config OK"
 # start installer : you need to say yes
 cd /var/www/hoff_pimcore/
 sudo ./vendor/bin/pimcore-install #--admin-username PIMadmin --admin-password toor
-sudo chown -R www-data:www-data app/config bin composer.json web/var
+sudo chown -R www-data:www-data app/config bin composer.json web/var *
 sudo chmod ug+x bin/*
 cd
 

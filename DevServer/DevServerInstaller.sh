@@ -56,7 +56,7 @@ cd Gitlab
 sudo docker-compose up -d
 cd ..
 
-cd Hoff_IT_Docs
+cd Docs
 sudo docker-compose up
 sudo docker-compose up -d
 cd ..

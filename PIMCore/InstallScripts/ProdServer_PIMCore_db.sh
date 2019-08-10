@@ -34,3 +34,5 @@ sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'pimcoreuser'@'192.168.
 
 
 echo "All is ok ready to go"
+
+echo "Now REBOOOOOOOT sinon ça va pas marcher pour l'appli"
