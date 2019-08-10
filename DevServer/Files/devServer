@@ -1,5 +1,5 @@
 upstream gitlab {
-    server 127.0.0.1:443;
+    server 127.0.0.1:8080;
 }
 
 upstream docs {
@@ -8,7 +8,7 @@ upstream docs {
 
 server {
     listen    80;
-    server_name    www.git.hoff.fr git.hoff.com;
+    server_name    www.gitlab.hoff.fr gitlab.hoff.fr;
 
     location / {
         include proxy_params;
