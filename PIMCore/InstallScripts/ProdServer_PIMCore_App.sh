@@ -43,14 +43,14 @@ sudo apt-get install -y ffmpeg
 sudo apt-get install -y libreoffice libreoffice-script-provider-python libreoffice-math xfonts-75dpi poppler-utils inkscape libxrender1 libfontconfig1 ghostscript
 
 # Install wkhtmltopdf
-wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb
+wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
 sudo dpkg -i wkhtmltox*
 sudo apt-get install -y -f
 sudo dpkg -i wkhtmltox*
 rm wkhtmltox*
 
 
-# Install Image Optimizers
+# Install Image Optimizers :: maybe memory leak ?
 sudo wget https://github.com/imagemin/zopflipng-bin/raw/master/vendor/linux/zopflipng -O /usr/local/bin/zopflipng
 sudo chmod 0755 /usr/local/bin/zopflipng
 
@@ -140,7 +140,6 @@ sudo rm /etc/nginx/sites-available/default
 sudo rm -rf /var/www/html/
 
 # Add https 
-sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get install -y certbot python-certbot-nginx
 
@@ -148,7 +147,8 @@ echo "configuration done !"
 
 echo "please configure the cron job :"
 echo "crontab -e"
-echo "*/5 * * * * /var/www/hoff_pimcore/bin/console maintenance"
+# */5 * * * * /var/www/hoff_pimcore/bin/console maintenance
+# 43 6 * * * certbot renew --post-hook "systemctl reload nginx"
 
 echo "##############################################################################################################"
 echo "##############################################################################################################"
