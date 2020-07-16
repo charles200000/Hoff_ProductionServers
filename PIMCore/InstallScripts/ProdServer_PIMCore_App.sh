@@ -149,6 +149,7 @@ echo "please configure the cron job :"
 echo "crontab -e"
 # */5 * * * * /var/www/hoff_pimcore/bin/console maintenance
 # 43 6 * * * certbot renew --post-hook "systemctl reload nginx"
+# Keep in mind, that the cron job has to run as the same user as the web interface to avoid permission issues (eg. www-data). !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 echo "##############################################################################################################"
 echo "##############################################################################################################"
