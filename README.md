@@ -35,6 +35,7 @@ Ajouter dans /etc/network/interfaces sur le proxmox :
 
 
 Ajouter dans /etc/network/interfaces sur la VM : (1.2.3.9 IP failover et 4.3.2.1 IP du serveur générale)
+
     auto eth0
     iface eth0 inet static
        address 1.2.3.9
