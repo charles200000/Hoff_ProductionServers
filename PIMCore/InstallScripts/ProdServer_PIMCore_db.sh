@@ -30,7 +30,7 @@ echo "Do you want to enable ufw with ssh and mysql configure ?"
 sudo ufw enable
 
 # add access to user on local network
-sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'pimcoreuser'@'192.168.0.%' IDENTIFIED BY '$1' WITH GRANT OPTION;"
+# sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'pimcoreuser'@'192.168.0.%' IDENTIFIED BY '$1' WITH GRANT OPTION;"
 
 
 echo "All is ok ready to go"
