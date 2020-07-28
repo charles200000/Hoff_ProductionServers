@@ -44,3 +44,15 @@ Ajouter dans /etc/network/interfaces sur la VM : (1.2.3.9 IP failover et 4.3.2.1
        post-up ip route add default via 4.3.2.254
        pre-down ip route del default via 4.3.2.254
        pre-down ip route del 4.3.2.254 dev eth0
+
+
+How to solve perl locales problem : add to ~/.bashrc
+
+    export LANGUAGE=en_US.UTF-8
+    export LANG=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+
+then :
+
+    sudo locale-gen en_US.UTF-8
+    
