@@ -15,7 +15,7 @@ sudo apt install -y ca-certificates apt-transport-https gnupg2 gnupg1 curl libcu
 echo "base packages installed"
 
 # first php dependencies
-sudo apt-get install -y php7.3-fpm php7.3-cgi php7.3-common php7.3-mbstring php7.3-xmlrpc php7.3-soap php7.3-gd php7.3-xml php7.3-intl php7.3-mysql php7.3-cli php7.3-zip php7.3-opcache php7.3-curl
+sudo apt-get install php8.0-fpm php8.0-cgi php8.0-common php8.0-mbstring php8.0- xmlrpc-api-utils php8.0-soap php8.0-gd php8.0-xml php8.0-intl php8.0-mysql php8.0-cli php8.0-zip php8.0-opcache php8.0-curl
 
 # install small dependencies
 sudo apt-get install -y php-imagick graphviz
@@ -90,15 +90,15 @@ echo "##########################################################################
 # php setup
 # !!!!!! TOKEN MAY CHANGE !!
 #wget --output-document=php.ini 
-sudo mv ./Files/php.ini /etc/php/7.3/fpm/
+sudo mv ./Files/php.ini /etc/php/8.0/fpm/
 echo "Moved php.ini config OK"
 
 # configure php-fpm
-#wget --output-document=www.conf 
+#wget --output-document=www.conf
 sudo mv ./Files/www.conf /etc/php/7.3/fpm/pool.d/
 echo "Moved www.conf OK"
 
-sudo service php7.3-fpm restart
+sudo service php8.0-fpm restart
 
 # Install PIMCore
 mkdir pimcore
@@ -123,7 +123,7 @@ sudo systemctl restart nginx.service
 sudo apt-get install -y mariadb-client
 
 #wget --output-document=installer.yml
-sudo mv ./Files/installer.yml /var/www/hoff_pimcore/app/config/
+sudo mv ./Files/installer.yml /var/www/hoff_pimcore/config/
 echo "Moved installer config OK"
 
 
