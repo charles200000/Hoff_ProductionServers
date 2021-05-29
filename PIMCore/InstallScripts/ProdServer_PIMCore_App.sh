@@ -10,12 +10,16 @@ sudo apt-get install -y nginx
 sudo systemctl enable nginx.service
 
 sudo apt-get install -y software-properties-common
-sudo apt install -y ca-certificates apt-transport-https gnupg2 gnupg1 curl libcurl4
+sudo apt install -y ca-certificates apt-transport-https gnupg2 gnupg1 curl libcurl4 lsb-release
+
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sury-php.list
+wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
+
 
 echo "base packages installed"
 
 # first php dependencies
-sudo apt-get install php8.0-fpm php8.0-cgi php8.0-common php8.0-mbstring php8.0- xmlrpc-api-utils php8.0-soap php8.0-gd php8.0-xml php8.0-intl php8.0-mysql php8.0-cli php8.0-zip php8.0-opcache php8.0-curl
+sudo apt-get install php8.0-fpm php8.0-cgi php8.0-common php8.0-mbstring php8.0-xmlrpc-api-utils php8.0-soap php8.0-gd php8.0-xml php8.0-intl php8.0-mysql php8.0-cli php8.0-zip php8.0-opcache php8.0-curl
 
 # install small dependencies
 sudo apt-get install -y php-imagick graphviz
@@ -95,7 +99,7 @@ echo "Moved php.ini config OK"
 
 # configure php-fpm
 #wget --output-document=www.conf
-sudo mv ./Files/www.conf /etc/php/7.3/fpm/pool.d/
+sudo mv ./Files/www.conf /etc/php/8.0/fpm/pool.d/
 echo "Moved www.conf OK"
 
 sudo service php8.0-fpm restart
@@ -123,7 +127,7 @@ sudo systemctl restart nginx.service
 sudo apt-get install -y mariadb-client
 
 #wget --output-document=installer.yml
-sudo mv ./Files/installer.yml /var/www/hoff_pimcore/config/
+#sudo mv ./Files/installer.yml /var/www/hoff_pimcore/config/
 echo "Moved installer config OK"
 
 
