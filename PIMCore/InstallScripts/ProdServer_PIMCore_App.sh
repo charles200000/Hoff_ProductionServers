@@ -14,6 +14,7 @@ sudo apt install -y ca-certificates apt-transport-https gnupg2 gnupg1 curl libcu
 
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sury-php.list
 wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
+sudo apt-get update
 
 
 echo "base packages installed"
