@@ -20,7 +20,7 @@ sudo apt-get update
 echo "base packages installed"
 
 # first php dependencies
-sudo apt-get install php8.0-fpm php8.0-cgi php8.0-common php8.0-mbstring php8.0-xmlrpc-api-utils php8.0-soap php8.0-gd php8.0-xml php8.0-intl php8.0-mysql php8.0-cli php8.0-zip php8.0-opcache php8.0-curl
+sudo apt-get install php8.0-fpm php8.0-cgi php8.0-common php8.0-mbstring php8.0 php8.0-xmlrpc xmlrpc-api-utils php8.0-soap php8.0-gd php8.0-xml php8.0-intl php8.0-mysql php8.0-cli php8.0-zip php8.0-opcache php8.0-curl
 
 # install small dependencies
 sudo apt-get install -y php-imagick graphviz
@@ -56,22 +56,22 @@ rm wkhtmltox*
 
 
 # Install Image Optimizers :
-sudo wget https://github.com/imagemin/zopflipng-bin/raw/master/vendor/linux/zopflipng -O /usr/local/bin/zopflipng
+sudo wget https://raw.githubusercontent.com/imagemin/zopflipng-bin/master/vendor/linux/zopflipng -O /usr/local/bin/zopflipng
 sudo chmod 0755 /usr/local/bin/zopflipng
 
-sudo wget https://github.com/imagemin/pngcrush-bin/raw/master/vendor/linux/pngcrush -O /usr/local/bin/pngcrush
+sudo wget https://raw.githubusercontent.com/imagemin/pngcrush-bin/master/vendor/linux/pngcrush -O /usr/local/bin/pngcrush
 sudo chmod 0755 /usr/local/bin/pngcrush
 
-sudo wget https://github.com/imagemin/jpegoptim-bin/raw/master/vendor/linux/jpegoptim -O /usr/local/bin/jpegoptim
+sudo wget https://raw.githubusercontent.com/imagemin/jpegoptim-bin/master/vendor/linux/jpegoptim -O /usr/local/bin/jpegoptim
 sudo chmod 0755 /usr/local/bin/jpegoptim
 
-sudo wget https://github.com/imagemin/pngout-bin/raw/master/vendor/linux/x64/pngout -O /usr/local/bin/pngout
+sudo wget https://raw.githubusercontent.com/imagemin/pngout-bin/master/vendor/linux/x64/pngout -O /usr/local/bin/pngout
 sudo chmod 0755 /usr/local/bin/pngout
 
-sudo wget https://github.com/imagemin/advpng-bin/raw/master/vendor/linux/advpng -O /usr/local/bin/advpng
+sudo wget https://raw.githubusercontent.com/imagemin/advpng-bin/master/vendor/linux/advpng -O /usr/local/bin/advpng
 sudo chmod 0755 /usr/local/bin/advpng
 
-sudo wget https://github.com/imagemin/mozjpeg-bin/raw/master/vendor/linux/cjpeg -O /usr/local/bin/cjpeg
+sudo wget https://raw.githubusercontent.com/imagemin/mozjpeg-bin/master/vendor/linux/cjpeg -O /usr/local/bin/cjpeg
 sudo chmod 0755 /usr/local/bin/cjpeg
 
 # Other tools
@@ -136,7 +136,7 @@ echo "Moved installer config OK"
 # start installer : you need to say yes
 cd /var/www/hoff_pimcore/
 sudo ./vendor/bin/pimcore-install #--admin-username PIMadmin --admin-password toor
-sudo chown -R www-data:www-data app/config bin composer.json web/var *
+sudo chown -R www-data:www-data bin composer.json *
 sudo chmod ug+x bin/*
 cd
 
